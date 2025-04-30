@@ -1,5 +1,11 @@
 const mongoose = require('mongoose');
 
+const auditLogSchema = new mongoose.Schema({
+    action: { type: String, required: true },
+    timestamp: { type: Date, default: Date.now },
+    userId:{type:String,required:true},
+    details: { type: String }
+})
 
 const UserSchema = new mongoose.Schema({
     userName:{ type: String, required: true, unique: true },
