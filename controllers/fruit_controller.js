@@ -79,3 +79,70 @@ const createFruit = async (req, res) => {
     }
 }
 
+const updateFruit = async (req, res) => {
+    try{
+        const {id} = req.params;
+        const {name, price, image, description, label, category, uom} = req.body;
+        const existingFruit = await Fruit.findById(id);
+        if(!existingFruit){
+            return res.status(404).json({message: "Không tìm thấy trái cây"});
+        }
+        if(!name && !price && !image && !description && !label && !category && !uom){
+            return res.status(400).json({message: "Không có thông tin nào để cập nhật"});
+        }
+        if(name){
+            existingFruit.name = name;
+        }
+        if(price){
+            existingFruit.price = price;
+        }
+        if(image){
+            existingFruit.image = image;
+        }
+        if(description){
+            existingFruit.description = description;
+        }
+        if(label){
+            existingFruit.label = label;
+        }
+        if(category){
+            existingFruit.category = category;
+        }
+        if(uom){
+            existingFruit.uom = uom;
+        }
+        await existingFruit.save();
+        return res.status(200).json({message: "Cập nhật trái cây thành công", fruit: existingFruit});
+    }catch(err){
+       console.log("Lỗi khi cập nhật trái cây:", err.message);
+       return res.status(500).json({message: "Lỗi khi cập nhật trái cây", error: err.message});
+    }
+}
+
+const deleteFruit = async (req, res) => {
+    try{
+        const {id} = req.params;
+        const existingFruit = await Fruit.findById(id);
+        if(!existingFruit){
+            return res.status(404).json({message: "Không tìm thấy trái cây"});
+        }
+        await existingFruit.remove();
+        return res.status(200).json({message: "Xóa trái cây thành công"});
+    }catch(err){
+       console.log("Lỗi khi xóa trái cây:", err.message);
+       return res.status(500).json({message: "Lỗi khi xóa trái cây", error: err.message});
+    }
+}
+
+const getAllFruits = async (req, res) => {
+    try{
+        const fruits = await Fruit.find();
+        return res.status(200).json({message: "Lấy danh sách trái cây thành công", fruits});
+    }catch(err){
+       console.log("Lỗi khi lấy danh sách trái cây:", err.message);
+       return res.status(500).json({message: "Lỗi khi lấy danh sách trái cây", error: err.message});
+    }
+}
+
+
+
