@@ -76,6 +76,7 @@ const Category = mongoose.model('Category', categorySchema);
 const Recipe = mongoose.model('Recipe', RecipeSchema);
 const Order = mongoose.model('Order', OrderSchema);
 const Cart = mongoose.model('Cart', CartSchema);
+const AuditLog = mongoose.model('AuditLog', auditLogSchema);
 
 // Xuất các model để sử dụng ở nơi khác
 module.exports = {
@@ -84,5 +85,6 @@ module.exports = {
     Category,
     Recipe,
     Order,
-    Cart
+    Cart,
+    AuditLog
 }
