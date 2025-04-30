@@ -62,7 +62,8 @@ const CartSchema = new mongoose.Schema({
     fruit: [
         {
           fruitId: { type: mongoose.Schema.Types.ObjectId, ref: 'Fruit', required: true },
-          quantity: { type: Number, required: true, default: 1 }
+          quantity: { type: Number, required: true, default: 1 },
+          priceAtTime: { type: Number, required: true } // Lưu giá tại thời điểm thêm vào giỏ hàng
         }
       ],
     totalPrice:{ type: Number, required: true },
