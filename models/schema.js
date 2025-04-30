@@ -24,11 +24,11 @@ const FruitSchema = new mongoose.Schema({
     description:{ type: String },
     label:{ type: String },
     category:{type: String, required: true},
+    uom:{ type: String, required: true }, // Đơn vị tính
 })
 
 const categorySchema = new mongoose.Schema({
     name:{ type: String, required: true, unique: true },
-    image:{ type: String },
     description:{ type: String },
 })
 
